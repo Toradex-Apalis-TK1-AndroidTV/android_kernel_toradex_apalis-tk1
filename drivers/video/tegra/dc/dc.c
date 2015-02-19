@@ -46,6 +46,9 @@
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 #include <linux/tegra_pm_domains.h>
+#include <linux/uaccess.h>
+#include <linux/ote_protocol.h>
+#include <linux/tegra-timer.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/display.h>
@@ -1974,6 +1977,9 @@ static void tegra_dc_continuous_irq(struct tegra_dc *dc, unsigned long status,
 		struct timespec tm = CURRENT_TIME;
 		dc->frame_end_timestamp = timespec_to_ns(&tm);
 		wake_up(&dc->timestamp_wq);
+
+		tegra_dc_vrr_extend_vfp(dc);
+		te_vrr_sec();
 
 		/* Mark the frame_end as complete. */
 		if (!completion_done(&dc->frame_end_complete))
