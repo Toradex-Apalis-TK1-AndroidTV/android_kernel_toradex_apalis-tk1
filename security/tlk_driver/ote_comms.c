@@ -370,10 +370,10 @@ static void do_smc(struct te_request *request, struct tlk_device *dev)
 	uint32_t smc_args;
 	uint32_t smc_params = 0;
 
-	smc_args = (char *)request - dev->req_param_buf;
+	smc_args = (uintptr_t)request - (uintptr_t)dev->req_addr;
 	if (request->params) {
 		smc_params =
-			(char *)(uintptr_t)request->params - dev->req_param_buf;
+			(uintptr_t)request->params - (uintptr_t)dev->req_addr;
 	}
 
 	(void)send_smc(request->type, smc_args, smc_params);
