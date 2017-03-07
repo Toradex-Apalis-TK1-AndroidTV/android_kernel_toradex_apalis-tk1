@@ -46,7 +46,6 @@
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 #include <linux/tegra_pm_domains.h>
-#include <linux/uaccess.h>
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/display.h>

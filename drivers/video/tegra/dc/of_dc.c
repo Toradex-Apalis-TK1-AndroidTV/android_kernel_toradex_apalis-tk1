@@ -40,9 +40,6 @@
 #include <linux/of_i2c.h>
 #include <linux/nvhost.h>
 #include <linux/timer.h>
-#include <linux/pinctrl/pinctrl.h>
-#include <linux/pinctrl/consumer.h>
-#include <linux/pinctrl/pinconf-tegra.h>
 
 #include <mach/clk.h>
 #include <mach/dc.h>
@@ -1604,19 +1601,6 @@ struct tegra_dc_platform_data
 
 	err = parse_tmds_config(ndev, np_target_disp,
 			pdata->default_out);
-	vrr_np = of_get_child_by_name(np_target_disp, "vrr-settings");
-	if (!vrr_np) {
-		pr_info("%s: could not find vrr-settings node\n", __func__);
-	} else {
-		pdata->default_out->vrr = devm_kzalloc(&ndev->dev,
-				sizeof(struct tegra_vrr), GFP_KERNEL);
-		if (!pdata->default_out->vrr) {
-			dev_err(&ndev->dev, "not enough memory\n");
-			goto fail_parse;
-		}
-
-		err = parse_vrr_settings(ndev, vrr_np,
-					   pdata->default_out->vrr);
 		if (err)
 			goto fail_parse;
 
