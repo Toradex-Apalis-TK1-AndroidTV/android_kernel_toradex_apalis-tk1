@@ -1976,7 +1976,6 @@ static void tegra_dc_continuous_irq(struct tegra_dc *dc, unsigned long status,
 		dc->frame_end_timestamp = timespec_to_ns(&tm);
 		wake_up(&dc->timestamp_wq);
 
-		tegra_dc_vrr_extend_vfp(dc);
 		/* Mark the frame_end as complete. */
 		if (!completion_done(&dc->frame_end_complete))
 			complete(&dc->frame_end_complete);
