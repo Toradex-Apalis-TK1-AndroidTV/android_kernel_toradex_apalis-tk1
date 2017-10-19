@@ -48,30 +48,29 @@
 		};
 	};
 
-	/* Apalis UART1 */
-	serial@70006000 {
-		compatible = "nvidia,tegra114-uart", "nvidia,tegra20-uart";
-		status = "okay";
-	};
+        serial@70006000 {
+                compatible = "nvidia,tegra114-hsuart";
+                status = "okay";
+        };
 
-	/* Apalis UART2 */
-	serial@70006040 {
-		compatible = "nvidia,tegra114-hsuart";
-		status = "okay";
-	};
+        serial@70006040 {
+                compatible = "nvidia,tegra114-hsuart";
+                status = "okay";
+        };
 
-	/* Apalis UART3 */
-	serial@70006200 {
-		compatible = "nvidia,tegra114-hsuart";
-		status = "okay";
-	};
+        serial@70006200 {
+                compatible = "nvidia,tegra114-hsuart";
+		dma-names = "tx";
+                status = "okay";
+        };
 
-/* TBD: Apalis UART4
 	serial@70006300 {
-		compatible = "nvidia,tegra114-hsuart";
+		compatible = "nvidia,tegra20-uart", "nvidia,tegra114-hsuart";
+		console-port;
+		sqa-automation-port;
 		status = "okay";
 	};
-*/
+
 	/* PWR_I2C: power I2C to audio codec, PMIC and temperature sensor */
 	i2c@7000d000 {
 		nvidia,bit-banging-xfer-after-shutdown;
